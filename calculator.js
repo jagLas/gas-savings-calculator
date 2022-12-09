@@ -56,23 +56,41 @@ function askMiles() {
 }
 
 function showInfo() {
-    // console.log(car);
-    // console.log(gas);
-    // console.log(miles);
-    // console.log(gasReading);
 
-    debugger
     result = car.compareCost(gas, gasReading, miles);
 
     let savingsMessage;
     if (result.savings < 0) {
-        savingsMessage = `lost ${-result.savings}`;
+        savingsMessage = `lost $${-result.savings}`;
     }   else{
-        savingsMessage = `saved ${result.savings}`;
+        savingsMessage = `saved $${result.savings}`;
     }
-    console.log(`You saved ${result.savings} and spent ${result.time} minutes doing it.`)
+    console.log(`\n\n\n\nYou ${savingsMessage} and spent ${result.time} minutes driving your ${year} ${car.make} ${car.model} ${miles} miles for gas.\n`)
 
-    rl.close();
+    optionsMenu();
+}
+
+function optionsMenu () {
+    rl.question(`What would you like to do?\n    start over\n    run it again\n    change a parameter\n    quit\n\n>`, response =>{
+        let answer = response.toLowerCase();
+        if (answer === 'start over') {
+            makeCar();
+        } else if (answer === 'change a parameter') {
+            console.log('feature not added');
+            rl.close();
+        } else if (answer === 'quit') {
+            rl.close();
+        } else if (answer === 'run it again') {
+            showInfo();
+        } else {
+            console.log(`\nplease type a valid input`);
+            optionsMenu();
+        }
+    })
+}
+
+function changeParameter() {
+    rl.question('\n\nWhat parameter would you like to modify?\ncar make\ncar model\n',)
 }
 
 makeCar();
