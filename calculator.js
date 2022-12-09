@@ -60,13 +60,19 @@ function showInfo() {
     result = car.compareCost(gas, gasReading, miles);
 
     let savingsMessage;
-    if (result.savings < 0) {
+    if (result === null) {
+        console.log('\n\n\n\nUh-oh, you might run out of gas before you get there!\n')
+    } else if (result.savings < 0) {
         savingsMessage = `lost $${-result.savings}`;
+        showResult();
     }   else{
         savingsMessage = `saved $${result.savings}`;
+        showResult();
     }
-    console.log(`\n\n\n\nYou ${savingsMessage} and spent ${result.time} minutes driving your ${year} ${car.make} ${car.model} ${miles} miles for gas.\n`)
 
+    function showResult() {
+        console.log(`\n\n\n\nYou ${savingsMessage} and spent ${result.time} minutes driving your ${this.year} ${car.make} ${car.model} ${miles} miles for gas.\n`)
+    }
     optionsMenu();
 }
 

@@ -30,6 +30,11 @@ class Car {
 
     compareCost(gasObj, gasReading, miles) {
         const result = {};
+        let gallonsRequired = this.findGallonsUsed(miles);
+        let gallonsInTank = gasReading * this.tankSize;
+        if (gallonsRequired > gallonsInTank) {
+            return null;
+        }
         result.closeGallons = this.findGallons(gasReading);
         result.closeCost = this.fillCost(gasObj.close, result.closeGallons);
         result.farGallons = this.findGallons(gasReading) + this.findGallonsUsed(miles);
