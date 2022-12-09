@@ -8,11 +8,38 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-let car;
-let gas;
-let miles;
-let gasReading;
+
+let car = new Car ('Grundai', 'Crelantra', 2022, 35, 10);
+let gas = new Gas (3, 2)
+let miles = 50;
+let gasReading = 1/2;
 let result;
+
+function initialize () {
+    if (Car.allCars[0] === car) {
+        console.log('\ndefaults loaded:');
+    }
+    console.log('')
+    console.log(car);
+    console.log('')
+    console.log(gas);
+    console.log('')
+    console.log(`miles: ${miles}    gas reading: ${gasReading}\n\n`)
+
+
+    rl.question('What would you like to do? \n    run\n    start over\n    quit\n\n>', response =>{
+        if (response === 'run') {
+            showInfo();
+        } else if (response === 'start over') {
+            makeCar();
+        } else if (response === 'quit') {
+            rl.close()
+        } else if (answer === 'change a parameter') {
+            console.log('feature not added');
+            rl.close();
+        }
+    })
+}
 
 function makeCar() {
     const makePrompt = () => rl.question('What is the make of your car?\n', (make) => modelPrompt(make));
@@ -71,32 +98,28 @@ function showInfo() {
     }
 
     function showResult() {
-        console.log(`\n\n\n\n  You ${savingsMessage} and spent ${result.time} minutes driving your ${this.year} ${car.make} ${car.model} ${miles} miles for gas.\n  Do you think your time is worth $${result.labor} per hour to do so?\n\n`)
+        console.log(`\n\n\n\n  You ${savingsMessage} and spent ${result.time} minutes driving your ${car.year} ${car.make} ${car.model} ${miles} miles for gas.\n  Do you think your time is worth $${result.labor} per hour to do so?\n\n`)
     }
-    optionsMenu();
+    endMenu();
 }
 
-function optionsMenu () {
-    rl.question(`What would you like to do?\n    start over\n    run it again\n    change a parameter\n    quit\n\n>`, response =>{
+function endMenu () {
+    rl.question(`What would you like to do?\n    run it again\n    quit\n\n>`, response =>{
         let answer = response.toLowerCase();
-        if (answer === 'start over') {
-            makeCar();
-        } else if (answer === 'change a parameter') {
-            console.log('feature not added');
-            rl.close();
-        } else if (answer === 'quit') {
+        
+        if (answer === 'quit') {
             rl.close();
         } else if (answer === 'run it again') {
-            showInfo();
+            initialize();
         } else {
             console.log(`\nplease type a valid input`);
-            optionsMenu();
+            endMenu();
         }
     })
 }
 
 function changeParameter() {
-    rl.question('\n\nWhat parameter would you like to modify?\ncar make\ncar model\n',)
+    rl.question('\n\nWhat parameter would you like to modify?\n  car\n  gas prices\n',)
 }
 
-makeCar();
+initialize();
