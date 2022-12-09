@@ -42,7 +42,7 @@ function makeGas() {
 }
 
 function askTankLevel () {
-    rl.question('How full is your tank?\nYou can answer from 0 (meaning empty) to 1 (meaning full). For example: enter "1/2" if you have half of a tank\n', answer => {
+    rl.question('Using a decimal or fraction from 0 - 1, how full is your tank?\n    For example: enter "1/2" if you have half of a tank\n', answer => {
         gasReading = eval(answer);
         showInfo();
     })
@@ -71,7 +71,7 @@ function showInfo() {
     }
 
     function showResult() {
-        console.log(`\n\n\n\nYou ${savingsMessage} and spent ${result.time} minutes driving your ${this.year} ${car.make} ${car.model} ${miles} miles for gas.\n`)
+        console.log(`\n\n\n\n  You ${savingsMessage} and spent ${result.time} minutes driving your ${this.year} ${car.make} ${car.model} ${miles} miles for gas.\n  Do you think your time is worth $${Math.round(100 * (result.savings / (result.time / 60))) / 100} per hour to do so?\n\n`)
     }
     optionsMenu();
 }
