@@ -37,6 +37,9 @@ function initialize () {
         } else if (answer === 'change a parameter') {
             console.log('feature not added');
             rl.close();
+        } else {
+            console.log('Please enter a valid option')
+            initialize();
         }
     })
 }
